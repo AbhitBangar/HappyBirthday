@@ -253,3 +253,27 @@ if (updateMusicBtn) {
     }
   });
 }
+
+/* --- Restart Flow --- */
+const restartBtn = document.getElementById('restart-btn');
+if (restartBtn) {
+  restartBtn.addEventListener('click', () => {
+    // Invisibly remove #music from URL bar Without reloading the page
+    history.replaceState(null, null, window.location.pathname);
+    
+    // Hide Stage 5
+    document.getElementById('stage5').classList.remove('active');
+    document.getElementById('stage5').classList.add('hidden');
+    
+    // Clear and restore Stage 1 passcode
+    clearCode();
+    tapCount = 0; // Reset candle taps
+    maskFlames.forEach(f => { if(f) f.classList.remove('blown') }); // restore flames
+    document.getElementById('wish-modal').classList.remove('visible'); // hide opened gift
+    
+    // Return to Stage 1
+    document.getElementById('stage1').classList.remove('hidden');
+    document.getElementById('stage1').classList.add('active');
+    window.scrollTo(0, 0);
+  });
+}
