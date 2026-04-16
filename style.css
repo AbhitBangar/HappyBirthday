@@ -312,19 +312,23 @@ body {
 /* Stage 5 styles */
 .scrollable-container {
   overflow-y: auto;
-  height: 100vh;
-  padding: 20px;
+  -webkit-overflow-scrolling: touch; /* Fix mobile scrolling on iOS */
+  height: 100dvh; /* Account for browser UI bars on mobile */
+  min-height: 100vh;
+  padding: 20px 10px;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .reveal-content {
   background: #fff;
   border-radius: 32px;
-  padding: 2rem 1.5rem;
-  width: 90%;
-  max-width: 380px; /* Narrower vertical design */
+  padding: 2rem 1.2rem;
+  width: 100%;
+  max-width: 380px; 
+  box-sizing: border-box;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -362,12 +366,17 @@ body {
 /* Playlist Customizer & Music UI */
 #music-frame {
   height: 380px;
+  min-width: 300px; /* Force Spotify to render full tracklist, overriding mobile tab cutoff */
+  width: 100%;
   transition: height 0.3s ease;
 }
 
 @media (max-width: 400px) {
   #music-frame {
-    height: 420px; /* Give more vertical breathing room on tiny screens */
+    height: 420px; 
+  }
+  .reveal-content {
+    padding: 1.5rem 0.5rem; /* Maximize internal space so music frame fits 300px natively */
   }
 }
 
