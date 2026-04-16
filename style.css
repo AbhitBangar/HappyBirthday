@@ -359,10 +359,21 @@ body {
   font-size: 1.1rem;
 }
 
-/* Playlist Customizer */
+/* Playlist Customizer & Music UI */
+#music-frame {
+  height: 380px;
+  transition: height 0.3s ease;
+}
+
+@media (max-width: 400px) {
+  #music-frame {
+    height: 420px; /* Give more vertical breathing room on tiny screens */
+  }
+}
+
 .playlist-customizer {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap; /* Allows auto stacking on tiny mobile screens */
   align-items: center;
   gap: 8px;
   margin-top: 15px;
@@ -371,8 +382,8 @@ body {
 }
 
 .cute-input {
-  flex: 1;
-  min-width: 0; /* Critical for mobile flex boundaries */
+  flex: 1 1 200px; /* Share space, wrap if <200px available */
+  min-width: 0; 
   padding: 10px 15px;
   border-radius: 20px;
   border: 2px solid rgba(254, 202, 202, 0.8);
@@ -391,10 +402,10 @@ body {
 }
 
 .small-btn {
-  flex: 0 0 auto;
+  flex: 1 1 80px; /* Grows wide if wrapped below input on mobile */
   padding: 10px 18px;
   font-size: 0.9rem;
-  white-space: nowrap;
+  text-align: center;
   border-radius: 20px;
   box-shadow: 0 4px 0 #ef4444;
 }
