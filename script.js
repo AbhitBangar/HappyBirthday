@@ -254,13 +254,10 @@ if (updateMusicBtn) {
   });
 }
 
-/* --- Restart Flow --- */
-const restartBtn = document.getElementById('restart-btn');
-if (restartBtn) {
-  restartBtn.addEventListener('click', () => {
-    // Invisibly remove #music from URL bar Without reloading the page
-    history.replaceState(null, null, window.location.pathname);
-    
+/* --- Restart / Back Navigation Flow --- */
+window.addEventListener('hashchange', () => {
+  // If the user swipes back or presses native mobile back button, the #music hash is removed
+  if (window.location.hash === '') {
     // Hide Stage 5
     document.getElementById('stage5').classList.remove('active');
     document.getElementById('stage5').classList.add('hidden');
@@ -275,5 +272,5 @@ if (restartBtn) {
     document.getElementById('stage1').classList.remove('hidden');
     document.getElementById('stage1').classList.add('active');
     window.scrollTo(0, 0);
-  });
-}
+  }
+});
